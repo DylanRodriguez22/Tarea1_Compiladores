@@ -7,6 +7,8 @@ Operador es para el símbolo de ese operador
 Símbolos (números, operadores, etc cosas sueltas para luego llamarlas)
 <left_parenthesis> ::= “є”
 <right_parenthesis> ::= “э”
+<left_block> ::= ¿
+<right_block> ::= ?
 <wall_comment> ::= “|”
 <left_exclamation> ::= “!”
 <right_exclamation> ::= “¡”
@@ -53,7 +55,9 @@ Símbolos (números, operadores, etc cosas sueltas para luego llamarlas)
 <if_keyword> ::= “if”
 <elseif_keyword> ::= “elif”
 <else_keyword> ::= “else”
-
+<line_break> ::= “\n”
+<single_quote> ::= “'”
+<double_quote> ::= “””
 Tipos de datos literales
 <int_literal> ::=  <minus_operator>? <digit1to9_literal> <decimal_digit_literal>*
 <int_literal> ::= <zero_literal>
@@ -61,8 +65,8 @@ Tipos de datos literales
 <float_literal> ::=  <minus_operator>? <zero_literal> <dot_literal> <decimal_digit_literal>* <digit1to9_literal>+
 <float_literal> ::= <minus_operator>? <digit1to9_literal> <decimal_digit_literal>* <dot_literal> (<decimal_digit_literal>* <digit1to9_literal>+ | <zero_literal>)
 <bool_literal> ::= “True” | “False”
-<char_literal> ::= ‘\.’\ NO ESTOY SEGURO
-<string_literal> ::= “\.*”\ NO ESTOY SEGURO
+<char_literal> ::= <single_quote> “.” <single_quote>
+<string_literal> ::= <double_quote> (.| <line_break>)* <double_quote>
 Identificador
 <identifier> ::= <letter_or_underscore> <identifier_char>*
 Operaciones aritméticas
@@ -72,7 +76,7 @@ Operaciones aritméticas
 <term> ::= <term> (<multiplication_operator> | <division_operator> | <int_division_operator> |  <modulo_operator>) <power> | <power>
 <power> ::= <factor> <power_operator> <power>| <factor>
 <factor> ::= <left_parenthesis> <arithmetic_expression> <right_parenthesis> | <arithmetic_operands>
-<arithmetic_operands> ::= <int_literal> | <float_literal> | <identifier> | <unary_negative> | <postfix_expression>
+<arithmetic_operands> ::= <int_literal> | <float_literal> | <identifier> | <unary_negative> | <postfix_expression> | <array_access> 
 Operaciones lógicas
 Esto vease como: 5 > 3, x == 4
 <condition> ::= <condition _simple> ( <logical_operator> <condition_simple> )*
@@ -93,8 +97,6 @@ Operaciones relacionales
 <relational_operator> ::= ">" | "<" | ">=" | "<="
 <equality_operator> ::= "==" | "!="
 
-
-
 Declaración de variables
 Pero ya seria algo como Let int x = 5$ o let int x;
 <declaration> ::= <let_keyword> <type> <identifier> <assignment_operator> <literal> <delimiter> | <let_keyword> <type> <identifier> <delimiter>
@@ -105,6 +107,12 @@ Pero ya seria algo como Let int x = 5$ o let int x;
 <assign> ::= <let_keyword> <type> <identifier> <assignment operator> <arithmetic_expression> <delimiter> 
 REASIGNACIÓN  aqui no contemplamos x += 2 o y *= 2 preguntar al profe sino algo así (suponga que ya declaro x) x = 2$
 <Reassignment> ::= <identifier>  <assignment_operator> <literal> <delimiter> |  <identifier> <assignment_operator> <identifier> <delimiter>
+
+<array>::= <let> <type> <identifier> <left_block>  <int_literal>  <right_block> <delimiter>
+Para asignarle valores  o sea modificar
+<assign_elements_array> ::=  <identifier> <left_block> <int_literal> <right_block> <assignment_operator> <literal> <delimiter>  | <identifier> <left_block> <int_literal> <right_block> <assignment_operator> <arithmetic_expression> 
+<delimiter><delimiter><array_access> ::= <identifier> <left_block>  <int_literal>  <right_block>
+
 Comentarios
 // Tomando a dot_literal como un punto que en REGEX es cualquier cosa menos salto de linea
 <simple_comment> ::= <wall_comment> <dot_literal>* 
@@ -133,7 +141,7 @@ Seria algo como {
 
 
 <input_statement> ::=  <input_keyword> <identifier > <delimiter>
-<output_statement> ::= <output_keyword> (<identifier> | <int_literal> | <float_literal> | <bool_literal> | <string_literal>) <delimiter>
+<output_statement> ::= <output_keyword> (<identifier> | <int_literal> | <float_literal> | <bool_literal> | <string_literal>| char_literal) <delimiter>
 <if> ::= <if_keyword> <left_ parenthesis>   <multiple condition>   < right_parenthesis > <block> <else_if >* <else_part>?
 <else_if> ::= <elseif_keyword> <left_ parenthesis>   <multiple condition>   < right_parenthesis > <block> 
 <else> ::= <else_keyword>  <block> 
@@ -142,6 +150,8 @@ Seria algo como {
 <funciones> ::= <funcion>*
 <params> ::= <param> ( <comma_keyword> <param> )*
 <param> ::= <type> <identifier>
+
+
 
 
 
