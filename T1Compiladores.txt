@@ -1,0 +1,151 @@
+Definir los tipos de dato
+Definir la asignación a variables
+Definir la reasignación a variables (en especial por los arreglos)
+Usar keyword para indicar que es una palabra reservada
+Literal es para valores explicitos. Por ejemplo la definición de un entero
+Operador es para el símbolo de ese operador
+Símbolos (números, operadores, etc cosas sueltas para luego llamarlas)
+<left_parenthesis> ::= “є”
+<right_parenthesis> ::= “э”
+<wall_comment> ::= “|”
+<left_exclamation> ::= “!”
+<right_exclamation> ::= “¡”
+<left_block> ::= “¿”
+<right_block> ::= “?”
+<plus_operator> ::= “+”
+<minus_operator> ::= “-“
+<multiplication_operator> ::= “*”
+<division_operator> ::= “/”
+<int_division_operator> ::= “//”
+<modulo_operator> ::= “%”
+<power_operator> ::= “^”
+<increment_operator> ::= "++"
+<decrement_operator> ::= "--"
+<assignment_operator> ::= "="  
+<digit1to9_literal> ::= [1-9]
+<decimal_digit_literal> ::= [0-9]
+<zero_literal> ::= 0
+<dot_literal> ::= “.”
+<letter_or_underscore> ::= [a-zA-Z_]
+<identifier_char> ::= [a-zA-Z0-9_]
+<int_keyword> ::= “int”
+<float_keyword> ::= “float”
+<bool_keyword> ::= “bool”
+<char_keyword> ::= “char”
+<string_keyword> ::= “string”
+<let_keyword> ::= “let”
+<input_keyword> ::= “input”
+<output_keyword> ::= “output”
+<comma_keyword> ::= “,”
+<numeric_type> ::= <int_keyword> | <float_keyword>
+<text_type> ::= <char_keyword> | <string_keyword>
+<greater_operator> ::= “>”
+<less_operator> ::= “<”
+<greater_equal_operator> ::= “>=”
+<less_equal_operator> ::= “<=”
+<equal_operator> ::= “==”
+<not_equal_operator> ::= “!=”
+<delimiter> ::= “$”
+<line_break> ::= “\n”
+<or_operator> ::= “~”
+<and_operator> ::= “@” 
+<not_operator> ::= “Σ”
+<if_keyword> ::= “if”
+<elseif_keyword> ::= “elif”
+<else_keyword> ::= “else”
+
+Tipos de datos literales
+<int_literal> ::=  <minus_operator>? <digit1to9_literal> <decimal_digit_literal>*
+<int_literal> ::= <zero_literal>
+<float_literal> ::= <zero_literal> <dot_literal> <zero_literal>
+<float_literal> ::=  <minus_operator>? <zero_literal> <dot_literal> <decimal_digit_literal>* <digit1to9_literal>+
+<float_literal> ::= <minus_operator>? <digit1to9_literal> <decimal_digit_literal>* <dot_literal> (<decimal_digit_literal>* <digit1to9_literal>+ | <zero_literal>)
+<bool_literal> ::= “True” | “False”
+<char_literal> ::= ‘\.’\ NO ESTOY SEGURO
+<string_literal> ::= “\.*”\ NO ESTOY SEGURO
+Identificador
+<identifier> ::= <letter_or_underscore> <identifier_char>*
+Operaciones aritméticas
+<unary_negative> ::= <minus_operator> (<int_literal> | <float_literal>)
+<postfix_expression> ::= < identifier > (<increment_operator> | <decrement_operator>)
+<arithmetic_expression> ::= <arithmetic_expression> (<plus_operator> | <minus_operator>) <term>  | <term>
+<term> ::= <term> (<multiplication_operator> | <division_operator> | <int_division_operator> |  <modulo_operator>) <power> | <power>
+<power> ::= <factor> <power_operator> <power>| <factor>
+<factor> ::= <left_parenthesis> <arithmetic_expression> <right_parenthesis> | <arithmetic_operands>
+<arithmetic_operands> ::= <int_literal> | <float_literal> | <identifier> | <unary_negative> | <postfix_expression>
+Operaciones lógicas
+Esto vease como: 5 > 3, x == 4
+<condition> ::= <condition _simple> ( <logical_operator> <condition_simple> )*
+<condition_simple> ::=  <relational_expression> | <bool_literal> | <identifier> | <left_ parenthesis > <condition>   <right _ parenthesis > | <not_condition>
+<relational_expression> ::= <arithmetic_expression> <relational_operator_numeric> <arithmetic_expression>
+<relational_operator_numeric> ::= <greater_operator> | <less_operator> | <greater_equal_operator> | <less_equal_operator>
+<equality_expression> ::= (<arithmetic_expression> | <bool_literal> | <identifier>) <equality_operator> (<arithmetic_expression> | <bool_literal> | <identifier>)
+<equality_operator> ::= <equal_operator> | <not_equal_operator>
+Esto permite cosas como (5+2 @ 3 ) @ False o también 5 > 2
+<logical_operator> ::= <or_operator> | <and_operator>
+<not_condition> ::= <not _operator> <condition _simple>
+Operaciones relacionales
+<conditionR> ::= <equality_condition>
+<equality_condition> ::= <relational_condition> ( <equality_operator> <relational_condition> )*
+<relational_condition> ::= <simple_condition> ( <relational_operator> <simple_condition> )*
+// Con declaration lo  tomo como una variable ya declarada
+<simple_condition> ::= <declaration> | <int_literal> | <float_literal> | <left_parenthesis> <conditionR> <right_parenthesis>
+<relational_operator> ::= ">" | "<" | ">=" | "<="
+<equality_operator> ::= "==" | "!="
+
+
+
+Declaración de variables
+Pero ya seria algo como Let int x = 5$ o let int x;
+<declaration> ::= <let_keyword> <type> <identifier> <assignment_operator> <literal> <delimiter> | <let_keyword> <type> <identifier> <delimiter>
+<type> ::= <int_keyword> | <float_keyword> | <bool_keyword> | <char_keyword> | <string_keyword>
+/// AQUI TAL VEZ QUITAMOS EL BOOL
+<literal> ::= <int_literal> | <float_literal> | <bool_literal> | <char_literal> | <string_literal>
+
+<assign> ::= <let_keyword> <type> <identifier> <assignment operator> <arithmetic_expression> <delimiter> 
+REASIGNACIÓN  aqui no contemplamos x += 2 o y *= 2 preguntar al profe sino algo así (suponga que ya declaro x) x = 2$
+<Reassignment> ::= <identifier>  <assignment_operator> <literal> <delimiter> |  <identifier> <assignment_operator> <identifier> <delimiter>
+Comentarios
+// Tomando a dot_literal como un punto que en REGEX es cualquier cosa menos salto de linea
+<simple_comment> ::= <wall_comment> <dot_literal>* 
+<multiple_comment> ::= <left_exclamation> ( <dot_literal> | <line_break>  )* <right_exclamation>
+
+
+
+
+
+
+
+Sentencia de bloques
+Seria algo como {
+	Let int x = 5$
+	x = 2$  o flotante,bool,string,char, etc
+	let float y$
+	let  int x = (5+4) – (3*7)
+	input…
+	output…
+	if, while, for estructural de control
+	
+}
+<block> ::= <left_block> <statements>* <right_block>
+<statements> ::= <statements> <statement> | <statement>
+<statement> ::= <assign> | <reassignment> | <declaration> | <input_statement> | <output_statement> | <if> |  <while> | <for>
+
+
+<input_statement> ::=  <input_keyword> <identifier > <delimiter>
+<output_statement> ::= <output_keyword> (<identifier> | <int_literal> | <float_literal> | <bool_literal> | <string_literal>) <delimiter>
+<if> ::= <if_keyword> <left_ parenthesis>   <multiple condition>   < right_parenthesis > <block> <else_if >* <else_part>?
+<else_if> ::= <elseif_keyword> <left_ parenthesis>   <multiple condition>   < right_parenthesis > <block> 
+<else> ::= <else_keyword>  <block> 
+<multiple_condition> ::=   <conditionR> | <condition>
+<funcion> ::= <type> <identifier> <left_ parenthesis> <right_ parenthesis> <block> | <type> <identifier> <left_parenthesis> <params> <right_parenthesis> <block>
+<funciones> ::= <funcion>*
+<params> ::= <param> ( <comma_keyword> <param> )*
+<param> ::= <type> <identifier>
+
+
+
+
+
+
+Lo de las operaciones aritméticas fue tomado de https://athena.ecs.csus.edu/~gordonvs/135/resources/04bnfParseTrees.pdf
