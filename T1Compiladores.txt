@@ -154,7 +154,7 @@ Seria algo como {
 }
 <block> ::= <left_block> <statements>* <right_block>
 <statements> ::= <statements> <statement> | <statement>
-<statement> ::= <declaration> | <reassignment> | <array_declaration> | <assign_elements_array>  | <input_statement> | <output_statement> | <if> |  <loop> | <for> | <return> 
+<statement> ::= <declaration> | <reassignment> | <array_declaration> | <assign_elements_array>  | <input_statement> | <output_statement> | <if> |  <loop> | <for> | <return> | <simple_comment>
 
 
 <input_statement> ::=  <input_keyword> <identifier > <delimiter>
@@ -164,7 +164,7 @@ Seria algo como {
 <else> ::= <else_keyword>  <block> 
 <multiple_condition> ::=   <conditionR> | <condition>
 <function> ::= <type> <identifier> <left_ parenthesis> <right_ parenthesis> <block> | <type> <identifier> <left_parenthesis> <params> <right_parenthesis> <block>
-<functions> ::= <function>*
+<functions> ::= (<function> | <multiple_comment> | <simple_comment>)*
 <params> ::= <param> ( <comma_keyword> <param> )*
 <param> ::= <type> <identifier>
 <return> ::= (<return_keyword> (<literal> | <identifier>) <delimiter>) | <return_keyword> <delimiter> 
@@ -181,7 +181,7 @@ FOR
 
 PROGRAMA FINAL
 <principal> ::= <void_keyword> <principal_keyword> <block>
-<global_variables> ::= (<declaration> | <array_declaration>)*
+<global_variables> ::= (<declaration> | <array_declaration> | <simple_comment> | <multiple_comment>)*
 <program> ::= <global_variables> <principal> <functions>
 <program> ::= <global_variables> <functions> <principal>
 <program> ::= <global_variables> <functions> <principal> <functions>
