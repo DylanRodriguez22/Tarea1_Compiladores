@@ -37,6 +37,8 @@ Símbolos (números, operadores, etc cosas sueltas para luego llamarlas)
 <bool_keyword> ::= “bool”
 <char_keyword> ::= “char”
 <string_keyword> ::= “string”
+<void_keyword> ::= "void"
+<principal_keyword> ::= "principal"
 <let_keyword> ::= “let”
 <input_keyword> ::= “input”
 <output_keyword> ::= “output”
@@ -157,12 +159,12 @@ Seria algo como {
 
 <input_statement> ::=  <input_keyword> <identifier > <delimiter>
 <output_statement> ::= <output_keyword> (<identifier> | <int_literal> | <float_literal> | <bool_literal> | <string_literal>| char_literal) <delimiter>
-<if> ::= <if_keyword> <left_ parenthesis>   <multiple condition>   < right_parenthesis > <block> <else_if>* <else_part>? FALTA RETURN
-<else_if> ::= <elseif_keyword> <left_ parenthesis>   <multiple condition>   < right_parenthesis > <block> 
+<if> ::= <if_keyword> <left_ parenthesis>   <multiple_condition>   < right_parenthesis > <block> <else_if>* <else_part>? FALTA RETURN
+<else_if> ::= <elseif_keyword> <left_ parenthesis>   <multiple_condition>   < right_parenthesis > <block> 
 <else> ::= <else_keyword>  <block> 
 <multiple_condition> ::=   <conditionR> | <condition>
-<funcion> ::= <type> <identifier> <left_ parenthesis> <right_ parenthesis> <block> | <type> <identifier> <left_parenthesis> <params> <right_parenthesis> <block>
-<funciones> ::= <funcion>*
+<function> ::= <type> <identifier> <left_ parenthesis> <right_ parenthesis> <block> | <type> <identifier> <left_parenthesis> <params> <right_parenthesis> <block>
+<functions> ::= <function>*
 <params> ::= <param> ( <comma_keyword> <param> )*
 <param> ::= <type> <identifier>
 <return> ::= (<return_keyword> (<literal> | <identifier>) <delimiter>) | <return_keyword> <delimiter> 
@@ -170,16 +172,19 @@ Seria algo como {
 
 
 LOOP
-<loop> ::= <loop_keyword> (<statements> | <break>)+ <exit_when_keyword> <condition> <delimiter> <end_loop_$_keyword> 
+<loop> ::= <loop_keyword> (<statements> | <break>)+ <exit_when_keyword> <multiple_condition> <delimiter> <end_loop_$_keyword> 
 
-<for_keyword> ::= "for"
-<step_keyword> ::= "step"
-<to_keyword> ::= "to"
-<downto_keyword> ::= "downto"
-<do_keyword> ::= "do"
 
 FOR
 <for> ::= <for_keyword> <declaration> <step_keyword> (<int_literal> | <float_literal>) (<to_keyword> | <downto_keyword>) (<int_literal> | <float_literal>) <do_keyword> <left_block> (<statements> | <break>)+ <right_block>
  
+
+PROGRAMA FINAL
+<principal> ::= <void_keyword> <principal_keyword> <block>
+<global_variables> ::= (<declaration> | <array_declaration>)*
+<program> ::= <global_variables> <principal> <functions>
+<program> ::= <global_variables> <functions> <principal>
+<program> ::= <global_variables> <functions> <principal> <functions>
+
 
 Lo de las operaciones aritméticas fue tomado de https://athena.ecs.csus.edu/~gordonvs/135/resources/04bnfParseTrees.pdf
