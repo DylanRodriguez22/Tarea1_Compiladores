@@ -1,0 +1,16 @@
+Nombre del curso: 
+	Compiladores e Intérpretes
+
+Número de semestre y año lectivo: 
+	II-2025
+
+Nombre de los estudiantes: 
+	Dylan Rodríguez Chavarría 
+	Bryan Londoño Marchena
+
+Número de carnet de los estudiantes:
+	Dylan - [2023161347]
+	Bryan - [2022233102]
+
+Número de tarea:
+	#1
