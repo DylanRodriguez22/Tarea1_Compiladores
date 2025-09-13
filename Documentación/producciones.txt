@@ -90,6 +90,7 @@ Operaciones aritméticas
 <factor> ::= <left_parenthesis> <arithmetic_expression> <right_parenthesis> | <arithmetic_operands>
 <arithmetic_operands> ::= <int_literal> | <float_literal> | <identifier> | <unary_negative> | <postfix_expression> | <array_access> 
 
+
 Operaciones lógicas
 Esto vease como: 5 > 3, x == 4
 <condition> ::= <condition_simple> ( <logical_operator> <condition_simple> )*
@@ -98,7 +99,6 @@ Esto vease como: 5 > 3, x == 4
 <relational_operator_numeric> ::= <greater_operator> | <less_operator> | <greater_equal_operator> | <less_equal_operator>
 <equality_expression> ::= (<arithmetic_expression> | <bool_literal> | <identifier>) <equality_operator> (<arithmetic_expression> | <bool_literal> | <identifier>)
 <equality_operator> ::= <equal_operator> | <not_equal_operator>
-Esto permite cosas como (5+2 @ 3 ) @ False o también 5 > 2
 <logical_operator> ::= <or_operator> | <and_operator>
 <not_condition> ::= <not _operator> <condition _simple>
 
@@ -107,19 +107,16 @@ Operaciones relacionales
 <conditionR> ::= <equality_condition>
 <equality_condition> ::= <relational_condition> ( <equality_operator> <relational_condition> )*
 <relational_condition> ::= <simple_condition> ( <relational_operator> <simple_condition> )*
-// Con declaration lo  tomo como una variable ya declarada
 <simple_condition> ::= <declaration> | <int_literal> | <float_literal> | <left_parenthesis> <conditionR> <right_parenthesis>
 <relational_operator> ::= ">" | "<" | ">=" | "<="
 <equality_operator> ::= "==" | "!="
 
 
-
 Declaración de variables y reasignación de variables
 Pero ya seria algo como Let int x = 5$ o let int x;
 <declaration> ::= <let_keyword> <type> <identifier> <assignment_operator> (<literal> | identifier | <array_access> | <arithmetic_expression> | <condition> | <conditionR>) <delimiter> | <let_keyword> <type> <identifier> <delimiter>
-/// AQUI TAL VEZ QUITAMOS EL BOOL
-REASIGNACIÓN  aqui no contemplamos x += 2 o y *= 2 preguntar al profe sino algo así (suponga que ya declaro x) x = 2$
 <reassignment> ::= <identifier>  <assignment_operator> (<literal> | identifier | <array_access> | <arithmetic_expression> | <condition> | <conditionR>) <delimiter>
+
 
 Declaración, modificación de arreglos y acceso a sus elementos
 <array_declaration>::= (<let> (<char_keyword>| <int_keyword>) <identifier> <left_block> <int_literal> <right_block> <delimiter>) | <let> (<char_keyword>| <int_keyword>) <identifier> <left_block> <int_literal> <right_block> 
@@ -129,23 +126,9 @@ Declaración, modificación de arreglos y acceso a sus elementos
 
 
 Comentarios
-// Tomando a dot_literal como un punto que en REGEX es cualquier cosa menos salto de linea
 <simple_comment> ::= <wall_comment> “.”* 
 <multiple_comment> ::= <left_exclamation> ( “.” | <line_break>  )* <right_exclamation>
 
-
-
-Sentencia de bloques
-Seria algo como {
-	Let int x = 5$
-	x = 2$  o flotante,bool,string,char, etc
-	let float y$
-	let  int x = (5+4) – (3*7)
-	input…
-	output…
-	if, while, for estructural de control
-	
-}
 
 Todas las sentencias y bloques de código posibles
 <block> ::= <left_block> <statements>* <right_block>
@@ -157,7 +140,8 @@ Funciones input y output
 <input_statement> ::=  <input_keyword> <identifier> <delimiter>
 <output_statement> ::= <output_keyword> (<identifier> | <int_literal> | <float_literal> | <bool_literal> | <string_literal> | char_literal) <delimiter>
 
-IF
+
+Decide of
 <decide_of> ::= <decide_of_keyword> <left_ parenthesis>   <multiple_condition>   < right_parenthesis > <block> <else_if>* <else_part>? 
 <else_if> ::= <elseif_keyword> <left_ parenthesis>   <multiple_condition>   < right_parenthesis > <block> 
 <else> ::= <else_keyword>  <block> 
@@ -185,6 +169,3 @@ PROGRAMA FINAL
 <program> ::= <global_variables> <principal> <functions>
 <program> ::= <global_variables> <functions> <principal>
 <program> ::= <global_variables> <functions> <principal> <functions>
-
-
-Lo de las operaciones aritméticas fue tomado de https://athena.ecs.csus.edu/~gordonvs/135/resources/04bnfParseTrees.pdf
